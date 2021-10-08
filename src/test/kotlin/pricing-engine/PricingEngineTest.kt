@@ -1,28 +1,46 @@
 package `pricing-engine`
 
+import money.EUR
 import org.junit.jupiter.api.Test
-import kotlin.test.fail
+import org.junit.jupiter.api.assertThrows
+import kotlin.test.assertEquals
 
 class PricingEngineTest {
 
     @Test
     fun `calculates price per minute`() {
-        fail("Implement me")
+        // Given
+        val pricePerMinute = EUR(30)
+        val duration = pricingEngine.durationInMinutes(1)
+
+        // When
+        val calculatedPrice = pricingEngine.calculatePrice(pricePerMinute, duration)
+
+        // Then
+        assertEquals(EUR(30), calculatedPrice)
     }
 
     @Test
     fun `guards against 0 or negative duration`() {
-        fail("Implement me")
+        assertThrows<IllegalArgumentException> {
+            pricingEngine.durationInMinutes(0)
+        }
     }
 
     @Test
-    fun `handles valid duration input`() {
-        fail("Implement me")
+    fun `duration verifies valid input`() {
+        // Given
+        val input = UnverifiedDuration(1)
+        val expected = input.verify()
+
+        // Then
+        assertEquals(expected, pricingEngine.durationInMinutes(1))
     }
 
     @Test
-    fun `handles invalid duration input`() {
-        fail("Implement me")
+    fun `duration throws error for invalid input`() {
+        assertThrows<IllegalArgumentException> {
+            UnverifiedDuration(0).verify()
+        }
     }
-
 }

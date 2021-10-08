@@ -5,7 +5,7 @@ plugins {
     application
 }
 
-group = "me.fred"
+group = "com.example"
 version = "1.0-SNAPSHOT"
 
 repositories {

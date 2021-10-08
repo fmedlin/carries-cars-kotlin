@@ -1,39 +1,49 @@
 package money
 
-import kotlin.test.Ignore
-import kotlin.test.Test
-import kotlin.test.fail
+import kotlin.test.*
 
 class MoneyTest {
 
     @Test
     fun `detect equal values`() {
-        fail("Implement me")
+        assertEquals(EUR(99), EUR(99))
+        assertTrue(EUR(99).equivalent(EUR(99)))
     }
 
     @Test
     fun `detect currency differences`() {
-        fail("Implement me")
+        assertNotEquals(EUR(99), USD(99))
+        assertFalse(EUR(99).equivalent(USD(99)))
     }
 
     @Test
     fun `detect amount differences`() {
-        fail("Implement me")
+        assertNotEquals(EUR(1), EUR(2))
+        assertFalse(EUR(1).equivalent(EUR(2)))
     }
 
     @Test
     fun `multiplies correctly`() {
-        fail("Implement me")
+        assertEquals(
+            EUR(400),
+            EUR(200).multiplyAndRound(2.0)
+        )
     }
 
     @Test
     fun `rounds up correctly`() {
-        fail("Implement me")
+        assertEquals(
+            EUR(200),
+            EUR(100).multiplyAndRound(1.999)
+        )
     }
 
     @Test
     fun `rounds down correctly`() {
-        fail("Implement me")
+        assertEquals(
+            EUR(199),
+            EUR(100).multiplyAndRound(1.994)
+        )
     }
 
     @Ignore
